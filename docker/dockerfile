@@ -1,0 +1,15 @@
+FROM node:14
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY ../src/package*.json ./usr/src/app
+
+# Create app directory
+WORKDIR /usr/src/app
+RUN npm install express mysql
+
+# Bundle app source
+COPY ../src/ /usr/src/app
+
+EXPOSE 3000
+CMD [ "node", "server.js" ]
